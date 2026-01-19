@@ -1,3 +1,4 @@
+// src/components/RandomPokemonCard.jsx
 import { useEffect, useState } from "react";
 import {
   Card,
@@ -55,7 +56,7 @@ export default function RandomPokemonCard() {
       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
       const data = await res.json();
 
-      const isShiny = Math.random() < 0.05;
+      const isShiny = Math.random() < 0.1;
 
       setPokemon({
         name: data.name,
@@ -71,7 +72,7 @@ export default function RandomPokemonCard() {
     }
 
     loadRandomPokemon();
-    const interval = setInterval(loadRandomPokemon, 300_000);
+    const interval = setInterval(loadRandomPokemon, 1000*60*60);
     return () => clearInterval(interval);
   }, []);
 
