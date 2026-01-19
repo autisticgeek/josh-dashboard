@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
-import { Paper, Box, Card, CardContent } from "@mui/material";
+import { Paper, Box, Card, CardContent, CardHeader } from "@mui/material";
 
 export default function HourlyTempChart() {
   const HOURS_TO_SHOW = 11;
@@ -40,8 +40,9 @@ export default function HourlyTempChart() {
   const xValues = hours.map((_, i) => i);
 
   return (
-    <Paper elevation={1} sx={{ minHeight: 200 }}>
-      <Card>
+    <Paper elevation={1}>
+      <Card sx={{ p: 2, textAlign: "center", minHeight: 220 }}>
+        <CardHeader title="Tempature" />
         <CardContent>
           <LineChart
             loading={tempsC.length === 0}

@@ -14,6 +14,7 @@ import {
   Button,
   Stack,
   Paper,
+  CardHeader,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 
@@ -110,31 +111,20 @@ export default function CountdownTimer() {
 
   return (
     <>
-      <Paper elevation={1} sx={{ p: 2 }}>
-        <Card>
-          <CardContent
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Typography variant="h5">
-              {holidayName || "No holiday set"}
-            </Typography>
+      <Card elevation={1} sx={{ p: 2, textAlign: "center" }}>
+        <CardHeader title={holidayName || "No holiday set"} />
+        <CardContent>
+          <Typography variant="h1">
+            {daysRemaining !== null ? daysRemaining : "Set a holiday"}
+          </Typography>
+        </CardContent>
 
-            <Typography variant="h1">
-              {daysRemaining !== null ? daysRemaining : "Set a holiday"}
-            </Typography>
-          </CardContent>
-
-          <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <IconButton onClick={handleOpen}>
-              <SettingsIcon />
-            </IconButton>
-          </CardActions>
-        </Card>
-      </Paper>
+        <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <IconButton onClick={handleOpen}>
+            <SettingsIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
 
       {/* Dialog lives OUTSIDE the card */}
       <Dialog open={open} onClose={handleClose}>
