@@ -72,7 +72,7 @@ export default function RandomPokemonCard() {
     }
 
     loadRandomPokemon();
-    const interval = setInterval(loadRandomPokemon, 1000*60*60);
+    const interval = setInterval(loadRandomPokemon, 60_000);
     return () => clearInterval(interval);
   }, []);
 
