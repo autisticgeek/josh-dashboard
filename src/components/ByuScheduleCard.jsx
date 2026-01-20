@@ -1,5 +1,12 @@
-import { useEffect, useState } from "react";
-import { Card, CardHeader, CardContent, Typography } from "@mui/material";
+import { Fragment, useEffect, useState } from "react";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
 
 const SPORT_MAP = {
   1411: "🏀 Women's Basketball",
@@ -11,6 +18,20 @@ const SPORT_MAP = {
   1554: "🏐 Men's Volleyball",
   1555: "🏃‍♀️ Women's Track & Field",
 };
+
+function msUntilMidnight() {
+  const now = new Date();
+  const midnight = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + 1,
+    0,
+    0,
+    0,
+    0
+  );
+  return midnight - now;
+}
 
 export function ByuScheduleCard() {
   const [games, setGames] = useState(null);
@@ -52,6 +73,18 @@ export function ByuScheduleCard() {
     }
 
     load();
+
+    const timeout = setTimeout(() => {
+      load();
+      const interval = setInterval(load, 24 * 60 * 60 * 1000);
+      cleanup.interval = interval;
+    }, msUntilMidnight());
+
+    const cleanup = {};
+    return () => {
+      clearTimeout(timeout);
+      if (cleanup.interval) clearInterval(cleanup.interval);
+    };
   }, []);
 
   if (!games) return null;
@@ -62,33 +95,29 @@ export function ByuScheduleCard() {
       day: "numeric",
     });
 
-    return `${g.sport} • ${g.opponent} • ${dateStr} • ${g.time}`;
+    return (
+      <ListItem disableGutters>
+        <ListItemText
+          primary={`${g.sport} • ${g.opponent}`}
+          secondary={`${dateStr} • ${g.time}`}
+          slotProps={{
+            primary: { variant: "body1" },
+            secondary: { variant: "body2" },
+          }}
+        />
+      </ListItem>
+    );
   };
 
   return (
-    <Card
-      elevation={3}
-      sx={{
-        maxHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <Card elevation={3}>
       <CardHeader title="BYU Upcoming Games" sx={{ pb: 0 }} />
-
-      <CardContent
-        sx={{
-          pt: 1,
-          display: "flex",
-          flexDirection: "column",
-          gap: 0.75,
-        }}
-      >
-        {games.map((g, i) => (
-          <Typography gutterBottom key={i}>
-            {formatGame(g)}
-          </Typography>
-        ))}
+      <CardContent sx={{ pt: 1 }}>
+        <List dense>
+          {games.map((g, i) => (
+            <Fragment key={i}>{formatGame(g)}</Fragment>
+          ))}
+        </List>
       </CardContent>
     </Card>
   );

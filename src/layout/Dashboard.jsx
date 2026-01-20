@@ -7,6 +7,7 @@ import StaticCountdown from "../components/StaticCountdown.jsx";
 import RandomPokemonCard from "../components/RandomPokemonCard.jsx";
 import EDMAudioCard from "../components/EDMAudioCard.jsx";
 import { ByuScheduleCard } from "../components/ByuScheduleCard.jsx";
+import NeonClock from "../components/NeonClock.jsx";
 
 // Default module registry
 const modules = [
@@ -31,7 +32,11 @@ const modules = [
     id: nanoid(),
     title: "BYU Upcoming Games",
     component: ByuScheduleCard,
-    order: 5, // or whatever position you want
+  },
+  {
+    id: nanoid(),
+    title: "Clock",
+    component: NeonClock,
   },
 ];
 
