@@ -12,7 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@fontsource/neonderthaw": "^5.2.8",
+    "@fontsource-variable/tilt-neon": "^5.2.10",
     "@fontsource/roboto": "^5.2.9",
     "@js-temporal/polyfill": "^0.5.1",
     "@mui/icons-material": "^7.3.7",

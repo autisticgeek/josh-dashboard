@@ -7,7 +7,9 @@ import {
   Typography,
 } from "@mui/material";
 import { keyframes } from "@mui/system";
-import "@fontsource/neonderthaw";
+// import "@fontsource/neonderthaw";
+import "@fontsource-variable/tilt-neon";
+
 
 const neonHue = keyframes`
   from { filter: hue-rotate(0deg); }
@@ -31,11 +33,11 @@ export default function NeonClock() {
   return (
     <Paper elevation={1}>
       <Card sx={{ p: 2 }}>
-        <CardContent >
+        <CardContent>
           <Typography
             variant="h2"
             sx={{
-              fontFamily: "'Neonderthaw', cursive",
+              fontFamily: "'Tilt Neon Variable', system-ui",
               textAlign: "center",
               animation: `${neonHue} 6s linear infinite`,
               textShadow: `

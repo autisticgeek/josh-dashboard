@@ -9,6 +9,7 @@ import EDMAudioCard from "../components/EDMAudioCard.jsx";
 import { ByuScheduleCard } from "../components/ByuScheduleCard.jsx";
 import NeonClock from "../components/NeonClock.jsx";
 
+
 // Default module registry
 const modules = [
   { id: nanoid(), component: CountdownTimer, props: {} },
