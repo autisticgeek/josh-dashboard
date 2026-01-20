@@ -45,7 +45,7 @@ export default function Dashboard() {
     <Container sx={{ pt: 2 }} maxWidth="xl">
       <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={2}>
         {modules
-          .sort((a, b) => a.order - b.order)
+          // .sort((a, b) => a.order - b.order)
           // eslint-disable-next-line no-unused-vars
           .map(({ id, component: Component, props }) => (
             <Component key={id} id={id} {...props} />
