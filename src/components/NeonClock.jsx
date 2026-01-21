@@ -2,19 +2,10 @@ import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
-  CardHeader,
   Paper,
   Typography,
 } from "@mui/material";
-import { keyframes } from "@mui/system";
-// import "@fontsource/neonderthaw";
 import "@fontsource-variable/tilt-neon";
-
-
-const neonHue = keyframes`
-  from { filter: hue-rotate(0deg); }
-  to { filter: hue-rotate(360deg); }
-`;
 
 export default function NeonClock() {
   const [time, setTime] = useState(() => new Date());
@@ -39,12 +30,13 @@ export default function NeonClock() {
             sx={{
               fontFamily: "'Tilt Neon Variable', system-ui",
               textAlign: "center",
-              animation: `${neonHue} 6s linear infinite`,
+              color: "#ff66ff", // soft neon pink
               textShadow: `
                 0 0 4px #fff,
-                0 0 8px #fff,
+                0 0 8px #ff66ff,
                 0 0 12px #ff00ff,
-                0 0 16px #ff00ff
+                0 0 16px #ff00ff,
+                0 0 24px #ff00ff
               `,
             }}
           >
