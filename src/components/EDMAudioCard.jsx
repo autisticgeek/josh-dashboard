@@ -56,19 +56,18 @@ export default function SomaFMAudioCard() {
           },
         }
       );
-      // const itunesRes = await fetch(
-      //   `${PROXY_URL}/cors?url=https://itunes.apple.com/search?term=${encodeURIComponent(
-      //     nowPlaying
-      //   )}&entity=song&limit=1`
-      // );
+
       const itunesData = await itunesRes.json();
 
-      if (itunesData.results?.length > 0) {
+      if (
+        itunesData.results?.length > 0 &&
+        itunesData.results[0].kind === "song"
+      ) {
         setArtwork(
           itunesData.results[0].artworkUrl100.replace("100x100", "600x600")
         );
       } else {
-        setArtwork(null);
+        setArtwork(channel?.xlimage || null);
       }
     } catch (err) {
       console.error("Metadata fetch failed:", err);
