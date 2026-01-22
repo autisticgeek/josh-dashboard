@@ -9,14 +9,9 @@ import {
 } from "@mui/material";
 
 const SPORT_MAP = {
-  1411: "🏀 Women's Basketball",
-  1478: "⛳️ Golf",
-  1480: "🏀 Men's Basketball",
-  1514: "🤿 Swimming & Diving",
-  1515: "🤿 Swimming & Diving",
-  1516: "🏐 Women's Volleyball",
-  1554: "🏐 Men's Volleyball",
+  1516: "🎾 Women's Tennis",
   1555: "🏃‍♀️ Women's Track & Field",
+  1556: "🏃 Mens's Track & Field",
 };
 
 function msUntilMidnight() {

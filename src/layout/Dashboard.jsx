@@ -8,7 +8,7 @@ import RandomPokemonCard from "../components/RandomPokemonCard.jsx";
 import EDMAudioCard from "../components/EDMAudioCard.jsx";
 import { ByuScheduleCard } from "../components/ByuScheduleCard.jsx";
 import NeonClock from "../components/NeonClock.jsx";
-
+import FamilyCalendarNext7 from "../components/FamilyCalendarNext2.jsx";
 
 // Default module registry
 const modules = [
@@ -38,6 +38,12 @@ const modules = [
     id: nanoid(),
     title: "Clock",
     component: NeonClock,
+  },
+  {
+    id: nanoid(),
+    title: "Next 7 Days",
+    component: FamilyCalendarNext7,
+    size: "medium",
   },
 ];
 

@@ -13,7 +13,6 @@ import {
   TextField,
   Button,
   Stack,
-  Paper,
   CardHeader,
 } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -49,6 +48,14 @@ export default function CountdownTimer() {
 
   const midnightTimeoutRef = useRef(null);
 
+  // NEW: ref to avoid stale closures
+  const holidayDateRef = useRef(holidayDate);
+
+  // Keep ref updated whenever holidayDate changes
+  useEffect(() => {
+    holidayDateRef.current = holidayDate;
+  }, [holidayDate]);
+
   // Recompute daysRemaining using Temporal
   const computeRemaining = (dateString) => {
     try {
@@ -73,7 +80,8 @@ export default function CountdownTimer() {
       .total("millisecond");
 
     midnightTimeoutRef.current = setTimeout(() => {
-      if (holidayDate) computeRemaining(holidayDate);
+      const currentDate = holidayDateRef.current;
+      if (currentDate) computeRemaining(currentDate);
       scheduleMidnightUpdate(); // schedule next midnight
     }, msUntilMidnight);
   };

@@ -8,8 +8,11 @@ import {
   Paper,
 } from "@mui/material";
 
+const PROXY_URL = import.meta.env.VITE_WORKER_URL;
+const API_KEY = import.meta.env.VITE_WORKER_KEY;
+
 export default function SomaFMAudioCard() {
-  const STREAM_URL = "https://long-wood-0764.email-884.workers.dev/stream";
+  const STREAM_URL = `${PROXY_URL}/stream`;
   const META_URL = "https://api.somafm.com/channels.json";
 
   const [track, setTrack] = useState(null);
