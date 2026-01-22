@@ -34,7 +34,7 @@ export function ByuScheduleCard() {
   useEffect(() => {
     async function load() {
       const url =
-        "https://byucougars.com/website-api/schedule-events?filter[upcoming]=true&filter[hide_from_all_sports_schedule]=false&sort=datetime&per_page=50&page=1";
+        "https://byucougars.com/website-api/schedule-events?filter[upcoming]=true&filter[hide_from_all_sports_schedule]=false&sort=datetime&per_page=20&page=1";
 
       const res = await fetch(url, {
         headers: {
