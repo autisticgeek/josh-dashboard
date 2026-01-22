@@ -46,10 +46,11 @@ export default function SomaFMAudioCard() {
       });
 
       // Fetch artwork from iTunes Search API
+      const itunesUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(
+        nowPlaying
+      )}&entity=song&limit=1`;
       const itunesRes = await fetch(
-        `${PROXY_URL}/cors?url=https://itunes.apple.com/search?term=${encodeURIComponent(
-          nowPlaying
-        )}&entity=song&limit=1`,
+        `${PROXY_URL}/cors?url=${encodeURIComponent(itunesUrl)}`,
         {
           headers: {
             "x-autisticgeek-key": API_KEY,
