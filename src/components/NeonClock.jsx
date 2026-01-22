@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, Paper, Typography } from "@mui/material";
 import "@fontsource-variable/tilt-neon";
 
 export default function NeonClock() {
@@ -15,11 +10,13 @@ export default function NeonClock() {
     return () => clearInterval(interval);
   }, []);
 
-  const timeString = time.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
+  const timeString = time
+    .toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    })
+    .replace(/\s?[AP]M$/i, "");
 
   return (
     <Paper elevation={1}>

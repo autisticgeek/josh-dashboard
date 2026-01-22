@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Temporal } from "@js-temporal/polyfill";
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
+import "@fontsource-variable/tilt-neon";
 
 export default function StaticCountdown({ month, day, title }) {
   const midnightRef = useRef(null);
@@ -43,7 +44,22 @@ export default function StaticCountdown({ month, day, title }) {
 
   return (
     <Card elevation={1} sx={{ p: 2, textAlign: "center" }}>
-      <CardHeader title={title} />
+      <CardHeader
+        title={title}
+        sx={{
+          fontFamily: "'Tilt Neon Variable', system-ui",
+          textAlign: "center",
+          color: "#66ccff", // bright neon blue
+          textShadow: `
+      0 0 4px #ffffff,
+      0 0 8px #66ccff,
+      0 0 12px #33bbff,
+      0 0 16px #0099ff,
+      0 0 24px #0088ff
+    `,
+        }}
+      />
+
       <CardContent>
         <Typography variant="h1">{daysRemaining}</Typography>
       </CardContent>
