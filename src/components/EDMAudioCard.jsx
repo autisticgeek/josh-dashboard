@@ -13,14 +13,18 @@ const API_KEY = import.meta.env.VITE_WORKER_KEY;
 
 export default function SomaFMAudioCard() {
   const STREAM_URL = `${PROXY_URL}/stream`;
-  const META_URL = "https://api.somafm.com/channels.json";
+  const META_URL = `${PROXY_URL}/cors?url=https://api.somafm.com/channels.json`;
 
   const [track, setTrack] = useState(null);
   const [artwork, setArtwork] = useState(null);
 
   async function fetchMetadata() {
     try {
-      const res = await fetch(META_URL);
+      const res = await fetch(META_URL, {
+        headers: {
+          "x-autisticgeek-key": API_KEY,
+        },
+      });
       const data = await res.json();
 
       // Find the Dub Step Beyond channel
@@ -43,10 +47,20 @@ export default function SomaFMAudioCard() {
 
       // Fetch artwork from iTunes Search API
       const itunesRes = await fetch(
-        `https://itunes.apple.com/search?term=${encodeURIComponent(
+        `${PROXY_URL}/cors?url=https://itunes.apple.com/search?term=${encodeURIComponent(
           nowPlaying
-        )}&entity=song&limit=1`
+        )}&entity=song&limit=1`,
+        {
+          headers: {
+            "x-autisticgeek-key": API_KEY,
+          },
+        }
       );
+      // const itunesRes = await fetch(
+      //   `${PROXY_URL}/cors?url=https://itunes.apple.com/search?term=${encodeURIComponent(
+      //     nowPlaying
+      //   )}&entity=song&limit=1`
+      // );
       const itunesData = await itunesRes.json();
 
       if (itunesData.results?.length > 0) {
