@@ -45,7 +45,8 @@
         https://pokeapi.co \
         https://api.somafm.com \
         https://byucougars.com \
-        https://*.pinyon.dev; \
+        https://*.pinyon.dev \
+        https://long-wood-0764.email-884.workers.dev; \
       frame-ancestors 'none'; \
       base-uri 'self'"
 
