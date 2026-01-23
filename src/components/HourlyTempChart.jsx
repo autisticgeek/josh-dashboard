@@ -41,12 +41,12 @@ export default function HourlyTempChart() {
 
   return (
     <Paper elevation={1}>
-      <Card sx={{ p: 2, textAlign: "center", minHeight: 220 }}>
+      <Card sx={{ p: 2, textAlign: "center" }}>
         <CardHeader title="Tempature" />
         <CardContent>
           <LineChart
             loading={tempsC.length === 0}
-            height={180}
+            height={300}
             grid={{ vertical: true, horizontal: true }}
             disableAxisListener
             xAxis={[
