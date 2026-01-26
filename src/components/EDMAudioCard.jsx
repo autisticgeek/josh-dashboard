@@ -46,9 +46,11 @@ export default function SomaFMAudioCard() {
       });
 
       // Fetch artwork from iTunes Search API
+      // Fetch artwork from iTunes Search API
       const itunesUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(
         nowPlaying
       )}&entity=song&limit=1`;
+
       const itunesRes = await fetch(
         `${PROXY_URL}/cors?url=${encodeURIComponent(itunesUrl)}`,
         {
@@ -58,7 +60,28 @@ export default function SomaFMAudioCard() {
         }
       );
 
-      const itunesData = await itunesRes.json();
+      // If iTunes blocks us or returns empty → use channel image
+      if (!itunesRes.ok) {
+        setArtwork(channel?.xlimage || channel?.largeimage || null);
+        return;
+      }
+
+      // Some 403 responses have Content-Length: 0
+      const contentLength = itunesRes.headers.get("Content-Length");
+      if (contentLength === "0") {
+        setArtwork(channel?.xlimage || channel?.largeimage || null);
+        return;
+      }
+
+      let itunesData;
+      try {
+        itunesData = await itunesRes.json();
+      } catch (err) {
+        console.error(err);
+        // JSON parse failed → fallback
+        setArtwork(channel?.xlimage || channel?.largeimage || null);
+        return;
+      }
 
       if (
         itunesData.results?.length > 0 &&
