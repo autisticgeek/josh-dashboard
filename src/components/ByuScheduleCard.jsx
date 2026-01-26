@@ -9,6 +9,9 @@ import {
 } from "@mui/material";
 
 const SPORT_MAP = {
+  1411: "Men's Basketball",
+  1478: "Men's Golf",
+  1480: "Women's Basketball",
   1516: "🎾 Women's Tennis",
   1555: "🏃‍♀️ Women's Track & Field",
   1556: "🏃 Mens's Track & Field",
@@ -52,7 +55,9 @@ export function ByuScheduleCard() {
           const date = new Date(event.datetime);
 
           return {
-            sport: SPORT_MAP[event.schedule_id] || "Unknown Sport",
+            sport:
+              SPORT_MAP[event.schedule_id] ||
+              `Unknown Sport ${event.schedule_id}`,
             date,
             opponent: event.opponent_name || "TBD",
             time: date.toLocaleTimeString("en-US", {
