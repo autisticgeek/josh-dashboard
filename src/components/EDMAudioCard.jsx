@@ -68,7 +68,7 @@ export default function SomaFMAudioCard() {
           itunesData.results[0].artworkUrl100.replace("100x100", "600x600")
         );
       } else {
-        setArtwork(channel?.xlimage || null);
+        setArtwork(channel?.xlimage || channel?.largeimage || null);
       }
     } catch (err) {
       console.error("Metadata fetch failed:", err);
