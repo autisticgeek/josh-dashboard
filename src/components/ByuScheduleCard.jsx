@@ -13,6 +13,7 @@ const SPORT_MAP = {
   1478: "⛳️ Men's Golf",
   1480: "🏀 Women's Basketball",
   1516: "🎾 Women's Tennis",
+  1514: "🏊‍♂️ Men's Swimming and Diving",
   1555: "🏃‍♀️ Women's Track & Field",
   1556: "🏃 Mens's Track & Field",
 };
