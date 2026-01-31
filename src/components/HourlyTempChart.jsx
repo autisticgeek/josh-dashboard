@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { Paper, Box, Card, CardContent, CardHeader } from "@mui/material";
 
+const round4 = (n) => Number(n).toFixed(4);
+
 export default function HourlyTempChart() {
   const HOURS_TO_SHOW = 11;
 
@@ -11,8 +13,11 @@ export default function HourlyTempChart() {
   useEffect(() => {
     async function loadWeather() {
       const pointRes = await fetch(
-        "https://api.weather.gov/points/40.32393,-111.713782"
+        `https://api.weather.gov/points/${round4(40.32393)},${round4(
+          -111.713782
+        )}`
       );
+
       const pointData = await pointRes.json();
 
       const hourlyUrl = pointData.properties.forecastHourly;
