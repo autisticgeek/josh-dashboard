@@ -11,12 +11,13 @@ import {
 const SPORT_MAP = {
   1411: "🏀 Men's Basketball",
   1478: "⛳️ Men's Golf",
-  1479 :"⛳️ Womens's Golf",
+  1479: "⛳️ Womens's Golf",
   1480: "🏀 Women's Basketball",
   1514: "🏊‍♂️ Men's Swimming and Diving",
   1515: "🏊‍♂️ Women's Swimming and Diving",
   1516: "🎾 Women's Tennis",
   1517: "🎾 Men's Tennis",
+  1553: "🥎 SoftBall",
   1555: "🏃‍♀️ Women's Track & Field",
   1556: "🏃 Mens's Track & Field",
 };
