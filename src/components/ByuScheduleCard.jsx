@@ -18,6 +18,7 @@ const SPORT_MAP = {
   1516: "🎾 Women's Tennis",
   1517: "🎾 Men's Tennis",
   1553: "🥎 SoftBall",
+  1554: "🏐 Mens Volleyball",
   1555: "🏃‍♀️ Women's Track & Field",
   1556: "🏃 Mens's Track & Field",
 };
@@ -74,7 +75,7 @@ export function ByuScheduleCard() {
         })
         .sort((a, b) => a.date - b.date);
 
-      setGames(normalized.slice(0, 3));
+      setGames(normalized.slice(0, 5));
     }
 
     load();
