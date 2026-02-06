@@ -17,6 +17,7 @@ const SPORT_MAP = {
   1515: "🏊‍♂️ Women's Swimming and Diving",
   1516: "🎾 Women's Tennis",
   1517: "🎾 Men's Tennis",
+  1519: "🤸‍♀️ Women's Gymnastics",
   1553: "🥎 SoftBall",
   1554: "🏐 Mens Volleyball",
   1555: "🏃‍♀️ Women's Track & Field",
