@@ -1,7 +1,7 @@
 // netlify/edge-functions/basic-auth.js
 
-const USERNAME = "steven";
-const PASSWORD = "password";
+const USERNAME = "pikachu";
+const PASSWORD = "byu";
 
 // Helper: decode base64 safely in Edge runtime
 function decodeBase64(encoded) {
