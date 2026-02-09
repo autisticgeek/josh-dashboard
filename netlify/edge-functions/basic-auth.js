@@ -48,7 +48,7 @@ export default async function handler(request) {
     // Authenticated → pass through
     return fetch(request);
   } catch (err) {
-    // Last-ditch safety net
+    console.error(err)
     return new Response("Edge auth failure", { status: 500 });
   }
 }
