@@ -1,39 +1,54 @@
 // netlify/edge-functions/basic-auth.js
 
-const USERNAME = "steven";       // change this
-const PASSWORD = "password"; // change this
+const USERNAME = "steven";
+const PASSWORD = "password";
 
-export default async function handler(request, context) {
-  const auth = request.headers.get("authorization");
+export default async function handler(request) {
+  try {
+    const url = new URL(request.url);
 
-  // No credentials → ask browser to show login prompt
-  if (!auth) {
-    return new Response("Authentication required", {
-      status: 401,
-      headers: {
-        "WWW-Authenticate": 'Basic realm="JoshDash"',
-      },
-    });
+    // Allow static assets through without auth
+    if (
+      url.pathname.startsWith("/assets/") ||
+      url.pathname === "/favicon.ico"
+    ) {
+      return fetch(request);
+    }
+
+    const auth = request.headers.get("authorization");
+
+    if (!auth) {
+      return new Response("Authentication required", {
+        status: 401,
+        headers: {
+          "WWW-Authenticate": 'Basic realm="JoshDash"',
+        },
+      });
+    }
+
+    const [scheme, encoded] = auth.split(" ");
+
+    if (scheme !== "Basic" || !encoded) {
+      return new Response("Invalid auth scheme", { status: 400 });
+    }
+
+    let decoded;
+    try {
+      decoded = atob(encoded);
+    } catch {
+      return new Response("Bad auth encoding", { status: 400 });
+    }
+
+    const [user, pass] = decoded.split(":");
+
+    if (user !== USERNAME || pass !== PASSWORD) {
+      return new Response("Unauthorized", { status: 401 });
+    }
+
+    // Authenticated → pass through
+    return fetch(request);
+  } catch (err) {
+    // Last-ditch safety net
+    return new Response("Edge auth failure", { status: 500 });
   }
-
-  // Parse "Basic base64(username:password)"
-  const [scheme, encoded] = auth.split(" ");
-
-  if (scheme !== "Basic") {
-    return new Response("Invalid auth scheme", { status: 400 });
-  }
-
-  const decoded = atob(encoded);
-  const [user, pass] = decoded.split(":");
-
-  if (user !== USERNAME || pass !== PASSWORD) {
-    return new Response("Unauthorized", { status: 401 });
-  }
-
-  // Authenticated → continue to site
-  return context.next();
 }
-
-export const config = {
-  path: "/*", // protect the entire site
-};
