@@ -23,7 +23,7 @@ export default function NeonClock() {
         <Typography
           variant="h2"
           sx={{
-            fontFamily: "'Consolas', 'Lucida Console', DejaVu Sans Mono', monospace",
+            fontFamily: "'Consolas', 'Lucida Console', 'DejaVu Sans Mono', monospace",
             textAlign: "center",
             // color: "#ff66ff", // soft neon pink
             textShadow: `
