@@ -46,7 +46,7 @@ export default function StaticCountdown({ month, day, title }) {
       <CardHeader
         title={title}
         sx={{
-          fontFamily: "'Consolas', 'Lucida Console', DejaVu Sans Mono', monospace",
+          fontFamily: "'Consolas', 'Lucida Console', 'DejaVu Sans Mono', monospace",
           textAlign: "center",
           // color: "#66ccff", // bright neon blue
           textShadow: `
