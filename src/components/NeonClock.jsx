@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, Paper, Typography } from "@mui/material";
-import "@fontsource-variable/tilt-neon";
 
 export default function NeonClock() {
   const [time, setTime] = useState(() => new Date());
@@ -24,7 +23,7 @@ export default function NeonClock() {
         <Typography
           variant="h2"
           sx={{
-            fontFamily: "'Tilt Neon Variable', system-ui",
+            fontFamily: "'Consolas', 'Lucida Console', DejaVu Sans Mono', monospace",
             textAlign: "center",
             // color: "#ff66ff", // soft neon pink
             textShadow: `
