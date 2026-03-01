@@ -11,7 +11,6 @@ import {
   Divider,
 } from "@mui/material";
 
-// --- Environment variables ---
 const PROXY_URL = import.meta.env.VITE_WORKER_URL;
 const API_KEY = import.meta.env.VITE_WORKER_KEY;
 const ICS_URL = import.meta.env.VITE_ICS_URL;
@@ -39,7 +38,9 @@ function parseICSEvents(icsText) {
 
     if (!dtStartRaw) continue;
 
-    let start, end, allDay = false;
+    let start,
+      end,
+      allDay = false;
 
     // All-day event (YYYYMMDD)
     if (/^\d{8}$/.test(dtStartRaw)) {
@@ -61,24 +62,6 @@ function parseICSEvents(icsText) {
       } else {
         end = start;
       }
-
-      // Patch: detect suspicious single-day all-day events
-      const isSingleDay = Temporal.PlainDate.compare(start, end) === 0;
-      const suspicious =
-        /dr|appointment|pt|therapy|dentist|meeting/i.test(summary);
-
-      if (isSingleDay && suspicious) {
-        allDay = false;
-        start = Temporal.PlainDateTime.from({
-          year: start.year,
-          month: start.month,
-          day: start.day,
-          hour: 0,
-          minute: 0,
-          second: 0,
-        });
-        end = start.add({ hours: 1 });
-      }
     } else {
       // Timed event
       const parseDateTime = (raw) => {
@@ -99,11 +82,8 @@ function parseICSEvents(icsText) {
         });
       };
 
-      const startDT = parseDateTime(dtStartRaw);
-      const endDT = dtEndRaw ? parseDateTime(dtEndRaw) : startDT;
-
-      start = startDT;
-      end = endDT;
+      start = parseDateTime(dtStartRaw);
+      end = dtEndRaw ? parseDateTime(dtEndRaw) : start;
       allDay = false;
     }
 
@@ -118,6 +98,7 @@ function parseICSEvents(icsText) {
 // ------------------------------------------------------------
 function isWithinNext2Days(event, today) {
   const tomorrow = today.add({ days: 1 });
+
 
   if (event.allDay) {
     return (
@@ -137,7 +118,6 @@ function groupEventsByDay(events, today) {
   const groups = new Map();
   const tomorrow = today.add({ days: 1 });
 
-  // 1. Add event days
   for (const event of events) {
     if (event.allDay) {
       let current = event.start;
@@ -165,13 +145,8 @@ function groupEventsByDay(events, today) {
     }
   }
 
-  // 2. Ensure exactly two buckets
   const keys = [today.toString(), tomorrow.toString()];
-  for (const key of keys) {
-    if (!groups.has(key)) groups.set(key, []);
-  }
-
-  // 3. Return in order
+  for (const key of keys) if (!groups.has(key)) groups.set(key, []);
   return keys.map((key) => ({
     date: Temporal.PlainDate.from(key),
     events: groups.get(key),
@@ -197,23 +172,18 @@ export default function FamilyCalendarNext2() {
 
       const res = await fetch(
         `${PROXY_URL}/cors?url=${encodeURIComponent(ICS_URL)}`,
-        {
-          headers: {
-            "x-autisticgeek-key": API_KEY,
-          },
-        }
+        { headers: { "x-autisticgeek-key": API_KEY } }
       );
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const text = await res.text();
-
       const allEvents = parseICSEvents(text);
       const today = Temporal.Now.plainDateISO();
 
       const upcoming = allEvents.filter((e) => isWithinNext2Days(e, today));
-      const grouped = groupEventsByDay(upcoming, today);
 
+      const grouped = groupEventsByDay(upcoming, today);
       setDays(grouped);
     } catch (e) {
       console.error(e);
@@ -226,7 +196,6 @@ export default function FamilyCalendarNext2() {
     const tomorrowMidnight = now
       .add({ days: 1 })
       .with({ hour: 0, minute: 0, second: 0, millisecond: 0 });
-
     const msUntilMidnight = tomorrowMidnight
       .since(now, { smallestUnit: "millisecond" })
       .total("millisecond");
@@ -240,12 +209,7 @@ export default function FamilyCalendarNext2() {
   useEffect(() => {
     fetchAndProcess();
     scheduleMidnightUpdate();
-
-    return () => {
-      if (midnightTimeoutRef.current) {
-        clearTimeout(midnightTimeoutRef.current);
-      }
-    };
+    return () => clearTimeout(midnightTimeoutRef.current);
   }, []);
 
   const formatDayLabel = (date) => {
@@ -260,15 +224,17 @@ export default function FamilyCalendarNext2() {
     });
   };
 
+  // --- UPDATED formatTime ---
   const formatTime = (event) => {
     if (event.allDay) return "All day";
 
     const dt = event.start;
-
-    if (typeof dt.toZonedDateTimeISO === "function") {
-      const zoned = dt.toZonedDateTimeISO(Temporal.Now.timeZoneId());
-      const time = zoned.toPlainTime().toString().slice(0, 5);
-      return time === "00:00" ? "Time not specified" : time;
+    if (dt instanceof Temporal.PlainDateTime) {
+      let hour = dt.hour;
+      const minute = dt.minute.toString().padStart(2, "0");
+      const ampm = hour >= 12 ? "PM" : "AM";
+      hour = hour % 12 || 12;
+      return `${hour}:${minute} ${ampm}`;
     }
 
     return "Time not specified";

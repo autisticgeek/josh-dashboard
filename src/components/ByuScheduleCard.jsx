@@ -7,36 +7,27 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
+import ICAL from "ical.js"; // npm install ical.js
 
-const SPORT_MAP = {
-  1411: "🏀 Men's Basketball",
-  1478: "⛳️ Men's Golf",
-  1479: "⛳️ Womens's Golf",
-  1480: "🏀 Women's Basketball",
-  1514: "🏊‍♂️ Men's Swimming and Diving",
-  1515: "🏊‍♂️ Women's Swimming and Diving",
-  1516: "🎾 Women's Tennis",
-  1517: "🎾 Men's Tennis",
-  1519: "🤸‍♀️ Women's Gymnastics",
-  1520: "⚾️ Baseball",
-  1553: "🥎 SoftBall",
-  1554: "🏐 Mens Volleyball",
-  1555: "🏃‍♀️ Women's Track & Field",
-  1556: "🏃 Mens's Track & Field",
-};
+const PROXY_URL = import.meta.env.VITE_WORKER_URL;
+const API_KEY = import.meta.env.VITE_WORKER_KEY;
 
-function msUntilMidnight() {
-  const now = new Date();
-  const midnight = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate() + 1,
-    0,
-    0,
-    0,
-    0
+function getNextNDates(n = 7) {
+  const today = new Date();
+  return Array.from({ length: n }, (_, i) => {
+    const d = new Date(today);
+    d.setDate(d.getDate() + i);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  });
+}
+
+function isSameDay(d1, d2) {
+  return (
+    d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate()
   );
-  return midnight - now;
 }
 
 export function ByuScheduleCard() {
@@ -44,55 +35,40 @@ export function ByuScheduleCard() {
 
   useEffect(() => {
     async function load() {
-      const url =
-        "https://byucougars.com/website-api/schedule-events?filter[upcoming]=true&filter[hide_from_all_sports_schedule]=false&sort=datetime&per_page=20&page=1";
-
+      const url = `${PROXY_URL}/cors?url=https://calendar.byu.edu/iCal/Export/10`;
       const res = await fetch(url, {
         headers: {
-          Accept: "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-          Referer: "https://byucougars.com/",
+          "x-autisticgeek-key": API_KEY,
         },
       });
+      const text = await res.text();
 
-      const data = await res.json();
-      const events = data.data || [];
+      const jcal = ICAL.parse(text);
+      const comp = new ICAL.Component(jcal);
+      const vevents = comp.getAllSubcomponents("vevent");
 
-      const normalized = events
+      const next3Days = getNextNDates();
+
+      const events = vevents
         .map((event) => {
-          const date = new Date(event.datetime);
-
+          const e = new ICAL.Event(event);
           return {
-            sport:
-              SPORT_MAP[event.schedule_id] ||
-              `Unknown Sport ${event.schedule_id}`,
-            date,
-            opponent: event.opponent_name || "TBD",
-            time: date.toLocaleTimeString("en-US", {
+            summary: e.summary,
+            date: e.startDate.toJSDate(),
+            time: e.startDate.toJSDate().toLocaleTimeString("en-US", {
               hour: "numeric",
               minute: "2-digit",
             }),
-            broadcast: event.broadcast || "TBD",
+            location: e.location || "TBD",
           };
         })
+        .filter((ev) => next3Days.some((d) => isSameDay(ev.date, d)))
         .sort((a, b) => a.date - b.date);
 
-      setGames(normalized.slice(0, 5));
+      setGames(events);
     }
 
     load();
-
-    const timeout = setTimeout(() => {
-      load();
-      const interval = setInterval(load, 24 * 60 * 60 * 1000);
-      cleanup.interval = interval;
-    }, msUntilMidnight());
-
-    const cleanup = {};
-    return () => {
-      clearTimeout(timeout);
-      if (cleanup.interval) clearInterval(cleanup.interval);
-    };
   }, []);
 
   if (!games) return null;
@@ -106,8 +82,8 @@ export function ByuScheduleCard() {
     return (
       <ListItem disableGutters>
         <ListItemText
-          primary={`${g.sport} • ${g.opponent}`}
-          secondary={`${dateStr} • ${g.time}`}
+          primary={`${g.summary}`}
+          secondary={`${dateStr} • ${g.location} • ${g.time}`}
           slotProps={{
             primary: { variant: "body1" },
             secondary: { variant: "body2" },
@@ -122,9 +98,9 @@ export function ByuScheduleCard() {
       <CardHeader title="BYU Upcoming Games" sx={{ pb: 0 }} />
       <CardContent sx={{ pt: 1 }}>
         <List dense>
-          {games.map((g, i) => (
-            <Fragment key={i}>{formatGame(g)}</Fragment>
-          ))}
+          {games.length
+            ? games.map((g, i) => <Fragment key={i}>{formatGame(g)}</Fragment>)
+            : "No upcoming games in the next 7 days"}
         </List>
       </CardContent>
     </Card>
