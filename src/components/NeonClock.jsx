@@ -26,7 +26,7 @@ export default function NeonClock() {
           sx={{
             fontFamily: "'Tilt Neon Variable', system-ui",
             textAlign: "center",
-            color: "#ff66ff", // soft neon pink
+            // color: "#ff66ff", // soft neon pink
             textShadow: `
               0 0 4px #fff,
               0 0 8px #ff66ff,

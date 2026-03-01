@@ -49,7 +49,7 @@ export default function StaticCountdown({ month, day, title }) {
         sx={{
           fontFamily: "'Tilt Neon Variable', system-ui",
           textAlign: "center",
-          color: "#66ccff", // bright neon blue
+          // color: "#66ccff", // bright neon blue
           textShadow: `
       0 0 4px #ffffff,
       0 0 8px #66ccff,
