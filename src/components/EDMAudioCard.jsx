@@ -107,7 +107,10 @@ export default function SomaFMAudioCard() {
   return (
     <Paper elevation={1}>
       <Card elevation={1} sx={{ p: 2, textAlign: "center", minHeight: 350 }}>
-        <CardHeader title="Dub Step Beyond" subheader="SomaFM" />
+        <CardHeader
+          title="Dub Step Beyond"
+          subheader="SomaFM"
+        />
 
         {artwork && (
           <CardMedia

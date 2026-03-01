@@ -114,96 +114,94 @@ export default function RandomPokemonCard() {
   }
 
   return (
-    <Paper elevation={1}>
-      <Card elevation={1} sx={{ textAlign: "center", p: 2 }}>
-        <CardMedia
-          component="img"
-          image={pokemon.image}
-          alt={pokemon.name}
-          sx={{
-            width: "60%",
-            margin: "0 auto",
-            objectFit: "contain",
-            maxHeight: 200,
-          }}
-        />
+    <Card elevation={1} sx={{ textAlign: "center", p: 2 }}>
+      <CardMedia
+        component="img"
+        image={pokemon.image}
+        alt={pokemon.name}
+        sx={{
+          width: "60%",
+          margin: "0 auto",
+          objectFit: "contain",
+          maxHeight: 200,
+        }}
+      />
 
-        <CardHeader
-          title={
-            pokemon.name.charAt(0).toUpperCase() +
-            pokemon.name.slice(1) +
-            (pokemon.shiny ? " (Shiny)" : "")
-          }
-          subheader={`#${pokemon.number}`}
-        />
+      <CardHeader
+        title={
+          pokemon.name.charAt(0).toUpperCase() +
+          pokemon.name.slice(1) +
+          (pokemon.shiny ? " (Shiny)" : "")
+        }
+        subheader={`#${pokemon.number}`}
+      />
 
-        <CardContent>
-          <Stack
-            direction="row"
-            spacing={1}
-            justifyContent="center"
-            sx={{ mb: 1 }}
-          >
-            {pokemon.types.map((type) => {
-              const bg = TYPE_COLORS[type];
-              const textColor = getContrastColor(bg);
-              return (
-                <Chip
-                  key={type}
-                  label={type}
-                  size="large"
-                  sx={{
-                    textTransform: "capitalize",
-                    backgroundColor: bg,
-                    color: textColor,
-                    fontWeight: "bold",
-                    px: 1,
-                  }}
-                />
-              );
-            })}
-          </Stack>
+      <CardContent>
+        <Stack
+          direction="row"
+          spacing={1}
+          justifyContent="center"
+          sx={{ mb: 1 }}
+        >
+          {pokemon.types.map((type) => {
+            const bg = TYPE_COLORS[type];
+            const textColor = getContrastColor(bg);
+            return (
+              <Chip
+                key={type}
+                label={type}
+                size="large"
+                sx={{
+                  textTransform: "capitalize",
+                  backgroundColor: bg,
+                  color: textColor,
+                  fontWeight: "bold",
+                  px: 1,
+                }}
+              />
+            );
+          })}
+        </Stack>
 
-          <Typography sx={{ mt: 1 }}>
-            Height: {pokemon.height / 10}m | Weight: {pokemon.weight / 10} kg
-          </Typography>
+        <Typography sx={{ mt: 1 }}>
+          Height: {pokemon.height / 10}m | Weight: {pokemon.weight / 10} kg
+        </Typography>
 
-          {weaknesses.length > 0 && (
-            <>
-              <Typography gutterBottom variant="h6" sx={{ mt: 2 }}>
-                Weak To
-              </Typography>
+        {weaknesses.length > 0 && (
+          <>
+            <Typography gutterBottom variant="h6" sx={{ mt: 2 }}>
+              Weak To
+            </Typography>
 
-              <Stack
-                direction="row"
-                spacing={1}
-                gap={1}
-                justifyContent="center"
-                sx={{ flexWrap: "wrap" }}
-              >
-                {weaknesses.map(([type, mult]) => {
-                  const bg = TYPE_COLORS[type];
-                  const textColor = getContrastColor(bg);
-                  return (
-                    <Chip
-                      key={type}
-                      label={`${type} ×${mult}`}
-                      sx={{
-                        backgroundColor: bg,
-                        color: textColor,
-                        textTransform: "capitalize",
-                        fontWeight: "bold",
-                        px: 1,
-                        m: 0.5,
-                      }}
-                    />
-                  );
-                })}
-              </Stack>
-            </>
-          )}
-        </CardContent>
-      </Card>
-    </Paper>
+            <Stack
+              direction="row"
+              spacing={1}
+              gap={1}
+              justifyContent="center"
+              sx={{ flexWrap: "wrap" }}
+            >
+              {weaknesses.map(([type, mult]) => {
+                const bg = TYPE_COLORS[type];
+                const textColor = getContrastColor(bg);
+                return (
+                  <Chip
+                    key={type}
+                    label={`${type} ×${mult}`}
+                    sx={{
+                      backgroundColor: bg,
+                      color: textColor,
+                      textTransform: "capitalize",
+                      fontWeight: "bold",
+                      px: 1,
+                      m: 0.5,
+                    }}
+                  />
+                );
+              })}
+            </Stack>
+          </>
+        )}
+      </CardContent>
+    </Card>
   );
 }

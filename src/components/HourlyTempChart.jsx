@@ -45,37 +45,35 @@ export default function HourlyTempChart() {
   const xValues = hours.map((_, i) => i);
 
   return (
-    <Paper elevation={1}>
-      <Card sx={{ p: 2, textAlign: "center" }}>
-        <CardHeader title="Tempature" />
-        <CardContent>
-          <LineChart
-            loading={tempsC.length === 0}
-            height={300}
-            grid={{ vertical: true, horizontal: true }}
-            disableAxisListener
-            xAxis={[
-              {
-                data: xValues,
-                valueFormatter: (i) => hours[i],
-              },
-            ]}
-            yAxis={[
-              {
-                width: 40, // compact for Masonry
-                valueFormatter: (c) => `${c.toFixed(0)}°`,
-              },
-            ]}
-            series={[
-              {
-                data: tempsC,
-                showMark: false,
-                color: "#1976d2",
-              },
-            ]}
-          />
-        </CardContent>
-      </Card>
-    </Paper>
+    <Card elevation={1} sx={{ p: 2, textAlign: "center" }}>
+      <CardHeader title="Tempature" />
+      <CardContent>
+        <LineChart
+          loading={tempsC.length === 0}
+          height={300}
+          grid={{ vertical: true, horizontal: true }}
+          disableAxisListener
+          xAxis={[
+            {
+              data: xValues,
+              valueFormatter: (i) => hours[i],
+            },
+          ]}
+          yAxis={[
+            {
+              width: 40, // compact for Masonry
+              valueFormatter: (c) => `${c.toFixed(0)}°`,
+            },
+          ]}
+          series={[
+            {
+              data: tempsC,
+              showMark: false,
+              color: "#1976d2",
+            },
+          ]}
+        />
+      </CardContent>
+    </Card>
   );
 }

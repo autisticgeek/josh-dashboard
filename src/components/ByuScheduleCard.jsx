@@ -15,9 +15,7 @@ const API_KEY = import.meta.env.VITE_WORKER_KEY;
 
 function getNextNDates(n = 7) {
   const today = Temporal.Now.plainDateISO();
-  return Array.from({ length: n }, (_, i) =>
-    today.add({ days: i })
-  );
+  return Array.from({ length: n }, (_, i) => today.add({ days: i }));
 }
 
 function isSameDay(d1, d2) {
@@ -66,9 +64,7 @@ export function ByuScheduleCard() {
             };
           })
           .filter((ev) => next7Days.some((d) => isSameDay(ev.date, d)))
-          .sort((a, b) =>
-            Temporal.PlainDate.compare(a.date, b.date)
-          );
+          .sort((a, b) => Temporal.PlainDate.compare(a.date, b.date));
 
         setGames(events);
       } catch (err) {
@@ -127,7 +123,10 @@ export function ByuScheduleCard() {
 
   return (
     <Card elevation={1} sx={{ p: 2 }}>
-      <CardHeader title="BYU Upcoming Games" sx={{ pb: 0 }} />
+      <CardHeader
+        title="BYU Upcoming Games"
+        sx={{ pb: 0, textAlign: "center" }}
+      />
       <CardContent sx={{ pt: 1 }}>
         <List dense>
           {games.length
