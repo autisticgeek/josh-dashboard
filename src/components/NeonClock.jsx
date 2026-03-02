@@ -23,16 +23,18 @@ export default function NeonClock() {
         <Typography
           variant="h2"
           sx={{
-            fontFamily: "'Consolas', 'Lucida Console', 'DejaVu Sans Mono', monospace",
+            fontFamily:
+              "'JetBrains Mono', 'Consolas', 'Lucida Console', 'DejaVu Sans Mono', monospace",
             textAlign: "center",
-            // color: "#ff66ff", // soft neon pink
+            color: "#fff",
             textShadow: `
-              0 0 4px #fff,
-              0 0 8px #ff66ff,
-              0 0 12px #ff00ff,
-              0 0 16px #ff00ff,
-              0 0 24px #ff00ff
-            `,
+      0 0 2px #fff,
+      0 0 6px #ff66ff,
+      0 0 12px #ff00ff,
+      0 0 20px #ff00ff,
+      0 0 40px #ff00ff,
+      0 0 80px #ff00ff
+    `,
           }}
         >
           {timeString}
