@@ -5,7 +5,37 @@
     "audio": "/music/jakob_welik-we-own-the-night-463855.mp3",
     "artwork": "/music/artworks-vF0QovbVgblMp9dp-RkEm6Q-t120x120.jpeg",
     "license": "CC0",
-    "attribution": "by jakob_welik via Pixabay"
+    "attribution": {
+      "license_certificate": {
+        "source": "Pixabay",
+        "license_type": "Pixabay Content License",
+        "licensor": {
+          "username": "jakob_welik-912135",
+          "profile_url": "https://pixabay.com/users/jakob_welik-912135/"
+        },
+        "licensee": "autisticgeek",
+        "audio_file": {
+          "title": "We Own the Night",
+          "url": "https://pixabay.com/music/dance-we-own-the-night-463855/",
+          "id": 463855
+        },
+        "date_of_download": "2026-03-02 20:16:28 UTC",
+        "issuer": {
+          "brand": "Pixabay (a Canva Germany GmbH brand)",
+          "address": {
+            "street": "Pappelallee 78/79",
+            "postal_code": "10437",
+            "city": "Berlin",
+            "country": "Germany"
+          }
+        },
+        "disclaimer": {
+          "content_responsibility": "The licensor is responsible for the audio file. Pixabay monitors uploaded audio files only to a reasonable extent and cannot be held responsible for user actions.",
+          "contact_email": "info@pixabay.com",
+          "note": "This is not a tax receipt or invoice."
+        }
+      }
+    }
   },
   {
     "title": "Neon Skies",
@@ -13,6 +43,36 @@
     "audio": "/music/jakob_welik-we-own-the-night-463855.mp3",
     "artwork": "/music/artworks-vF0QovbVgblMp9dp-RkEm6Q-t120x120.jpeg",
     "license": "CC0",
-    "attribution": "by jakob_welik via Pixabay"
+    "attribution": {
+      "license_certificate": {
+        "source": "Pixabay",
+        "license_type": "Pixabay Content License",
+        "licensor": {
+          "username": "jakob_welik-912135",
+          "profile_url": "https://pixabay.com/users/jakob_welik-912135/"
+        },
+        "licensee": "autisticgeek",
+        "audio_file": {
+          "title": "Neon Skies",
+          "url": "https://pixabay.com/music/dance-neon-skies-463849/",
+          "id": 463849
+        },
+        "date_of_download": "2026-03-02 20:36:21 UTC",
+        "issuer": {
+          "brand": "Pixabay (a Canva Germany GmbH brand)",
+          "address": {
+            "street": "Pappelallee 78/79",
+            "postal_code": "10437",
+            "city": "Berlin",
+            "country": "Germany"
+          }
+        },
+        "disclaimer": {
+          "content_responsibility": "The licensor is responsible for the audio file. Pixabay monitors uploaded audio files only to a reasonable extent and cannot be held responsible for user actions.",
+          "contact_email": "info@pixabay.com",
+          "note": "This is not a tax receipt or invoice."
+        }
+      }
+    }
   }
 ]
