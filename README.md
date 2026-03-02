@@ -35,38 +35,49 @@ This project doubles as a demonstration of how I approach real-world engineering
 
 ## Project Structure
 
+```
 .
-├── eslint.config.js  
-├── index.html  
-├── package-lock.json  
-├── package.json  
-├── public  
-│ └── vite.svg  
-├── README.md  
-├── src  
-│ ├── App.css  
-│ ├── App.jsx  
-│ ├── assets  
-│ │ └── react.svg  
-│ ├── components  
-│ │ ├── ByuScheduleCard.jsx  
-│ │ ├── CountdownTimer.jsx  
-│ │ ├── EDMAudioCard.jsx  
-│ │ ├── HourlyTempChart.jsx  
-│ │ ├── RandomPokemonCard.jsx  
-│ │ └── StaticCountdown.jsx  
-│ ├── index.css  
-│ ├── layout  
-│ │ └── Dashboard.jsx  
-│ ├── main.jsx  
-│ ├── modules  
-│ └── utils  
-│ ├── storage.js  
-│ └── time.js  
-├── touch  
+├── README.md
+├── eslint.config.js
+├── index.html
+├── netlify
+│   └── edge-functions
+│       └── basic-auth.js
+├── netlify.toml
+├── package-lock.json
+├── package.json
+├── public
+│   ├── music
+│   │   ├── artworks-vF0QovbVgblMp9dp-RkEm6Q-t120x120.jpeg
+│   │   ├── dance-we-own-the-night-463855-license.txt
+│   │   ├── jakob_welik-neon-skies-463849.mp3
+│   │   ├── jakob_welik-we-own-the-night-463855.mp3
+│   │   └── playlist.json
+│   └── vite.svg
+├── src
+│   ├── App.css
+│   ├── App.jsx
+│   ├── assets
+│   │   └── react.svg
+│   ├── components
+│   │   ├── ByuScheduleCard.jsx
+│   │   ├── CountdownTimer.jsx
+│   │   ├── EDMAudioCard.jsx
+│   │   ├── FamilyCalendarNext2.jsx
+│   │   ├── HourlyTempChart.jsx
+│   │   ├── NeonClock.jsx
+│   │   ├── PublicDomainAudioCard.jsx
+│   │   ├── RandomPokemonCard.jsx
+│   │   └── StaticCountdown.jsx
+│   ├── layout
+│   │   └── Dashboard.jsx
+│   ├── main.jsx
+│   ├── modules
+│   └── utils
+│       ├── storage.js
+│       └── time.js
 └── vite.config.js
-
-8 directories, 22 files
+```
 
 ---
 
@@ -87,13 +98,16 @@ If you fork this project, update the coordinates or API key for your own area.
 Fetches upcoming events from BYU’s public API.  
 Includes:
 
-- schedule normalization
-- sport mapping with emoji labels
-- graceful fallback when a sport is out of season
+- Schedule normalization
+- Sport mapping with emoji labels
+- Graceful fallback when a sport is out of season
 
-### Music
+### Music Modules
 
-Displays the currently playing track from SomaFM’s JSON feed.
+Includes:
+
+- SomaFM “Now Playing” tile
+- Public-domain / Creative Commons audio tile (`PublicDomainAudioCard`)
 
 ### Graph Module
 
@@ -104,9 +118,9 @@ Demonstrates real-time temperature graphing using a simple data pipeline.
 Some modules are designed to run behind a Cloudflare Worker.  
 This project demonstrates:
 
-- custom Worker endpoints
-- secure API key handling
-- browser-like header forwarding
+- Custom Worker endpoints
+- Secure API key handling
+- Browser-like header forwarding
 - CORS-safe fetch patterns
 
 ---
@@ -126,10 +140,12 @@ This project demonstrates:
 
 Clone the repo:
 
-    git clone https://github.com/autisticgeek/josh-dashboard.git
-    cd josh-dashboard
-    npm install
-    npm run dev
+```bash
+git clone https://github.com/autisticgeek/josh-dashboard.git
+cd josh-dashboard
+npm install
+npm run dev
+```
 
 ---
 
@@ -141,16 +157,18 @@ This project is intentionally easy to customize.
 
 Update your location or API key in:
 
-    /src/components/HourlyTempChart.jsx
+```
+/src/components/HourlyTempChart.jsx
+```
 
-### Add or remove tiles
+### Add or Remove Tiles
 
 Each tile is a standalone component.  
 To add your own:
 
-1. Create a file under /src/components/
+1. Create a file under `/src/components/`
 2. Export a React component
-3. Add it to the layout in /src/layout/Dashboard.jsx
+3. Add it to the layout in `/src/layout/Dashboard.jsx`
 
 ### BYU Sports
 
@@ -158,15 +176,105 @@ If you want to track a different team, swap out the API endpoint or sport mappin
 
 ---
 
+### Music Modules: `PublicDomainAudioCard`
+
+`PublicDomainAudioCard` is a React component that streams **public-domain and stream-safe EDM music** directly from a local playlist file.  
+
+It is designed for creators who need **DMCA-safe background music** for live streams, videos, or embedded site audio.
+
+#### Features
+
+- Loads a playlist from `/music/playlist.json`
+- Automatically plays the first track when loaded
+- Automatically advances to the next track when one ends
+- Displays:
+  - Artwork
+  - Title
+  - Artist
+  - Source platform
+  - License type
+- One-click **Attribution Copy** button (if required by license)
+- Uses Material UI for styling
+- Fully client-side (no streaming APIs required)
+
+#### How It Works
+
+##### Playlist Loading
+
+On initial mount, the component fetches:
+
+```text
+/music/playlist.json
+```
+
+Expected format:
+
+```json
+{
+  "tracks": [
+    {
+      "title": "Track Name",
+      "artist": "Artist Name",
+      "audio": "/music/audio/track.mp3",
+      "artwork": "/music/art/cover.jpg",
+      "license": { "type": "CC0" },
+      "source": { "platform": "youtube" },
+      "attribution": "Optional attribution text"
+    }
+  ]
+}
+```
+
+If the file fails to load, an error is logged to the console.
+
+##### Playback Behavior
+
+When a track ends:
+
+```js
+setIndex((prev) => (prev + 1) % playlist.length);
+```
+
+This creates an infinite loop of tracks.
+
+When the `index` changes, the `<audio>` element source updates and playback begins.
+
+##### Attribution Support
+
+If a track includes an `attribution` field:
+
+- A **Copy Attribution** button appears.
+- Clicking it copies the attribution text to the clipboard:
+
+```js
+navigator.clipboard.writeText()
+```
+
+#### Requirements
+
+- React
+- Material UI (`@mui/material`)
+- A publicly accessible `/music/playlist.json`
+- Browser support for `navigator.clipboard`
+
+#### Notes
+
+- Audio files must be hosted locally or on a CORS-enabled server.
+- Autoplay may be blocked by some browsers unless triggered by user interaction.
+- If `playlist.length === 0`, no playback occurs.
+- Component assumes modern browser support.
+
+---
+
 ## Forking / Contributing
 
 You’re welcome to:
 
-- fork the project
-- clone it
-- strip out modules you don’t need
-- add your own tiles
-- submit ideas
+- Fork the project
+- Clone it
+- Strip out modules you don’t need
+- Add your own tiles
+- Submit ideas
 
 If you have suggestions or want to collaborate, you can reach me through my GitHub profile.  
 My contact information is available there.
@@ -184,10 +292,10 @@ Use it however you like.
 
 This project exists because I wanted to build something fun, useful, and personal for my son — but it also reflects the way I approach engineering:
 
-- modular
-- maintainable
+- Modular
+- Maintainable
 - API-driven
-- future‑proof
-- and always open to iteration
+- Future‑proof
+- Always open to iteration
 
 If you find it useful or inspiring, feel free to build on it.

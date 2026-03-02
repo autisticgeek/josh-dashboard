@@ -21,7 +21,7 @@ export default function PublicDomainAudioCard() {
   useEffect(() => {
     fetch("/music/playlist.json")
       .then((res) => res.json())
-      .then(setPlaylist)
+      .then((data) => setPlaylist(data.tracks || []))
       .catch((err) => console.error("Playlist load failed:", err));
   }, []);
 
@@ -47,7 +47,7 @@ export default function PublicDomainAudioCard() {
       <Card elevation={1} sx={{ p: 2, textAlign: "center", minHeight: 350 }}>
         <CardHeader
           title="Stream Safe EDM"
-          subheader="CC0 / Creative Commons"
+          subheader="CC0 / Creative Commons / YouTube Audio Library"
         />
 
         {track?.artwork && (
@@ -74,8 +74,14 @@ export default function PublicDomainAudioCard() {
             {track?.artist}
           </Typography>
 
+          {track?.source?.platform && (
+            <Typography variant="caption" sx={{ display: "block", mb: 1 }}>
+              Source: {track.source.platform.toUpperCase()}
+            </Typography>
+          )}
+
           <Typography variant="caption" sx={{ display: "block", mb: 2 }}>
-            License: {track?.license}
+            License: {track?.license?.type}
           </Typography>
 
           {track?.attribution && (

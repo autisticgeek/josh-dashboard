@@ -1,78 +1,93 @@
-[
-  {
-    "title": "We Own the Night",
-    "artist": "Jakob Welik",
-    "audio": "/music/jakob_welik-we-own-the-night-463855.mp3",
-    "artwork": "/music/artworks-vF0QovbVgblMp9dp-RkEm6Q-t120x120.jpeg",
-    "license": "CC0",
-    "attribution": {
-      "license_certificate": {
-        "source": "Pixabay",
-        "license_type": "Pixabay Content License",
-        "licensor": {
-          "username": "jakob_welik-912135",
-          "profile_url": "https://pixabay.com/users/jakob_welik-912135/"
-        },
-        "licensee": "autisticgeek",
-        "audio_file": {
-          "title": "We Own the Night",
-          "url": "https://pixabay.com/music/dance-we-own-the-night-463855/",
-          "id": 463855
-        },
-        "date_of_download": "2026-03-02 20:16:28 UTC",
-        "issuer": {
-          "brand": "Pixabay (a Canva Germany GmbH brand)",
-          "address": {
-            "street": "Pappelallee 78/79",
-            "postal_code": "10437",
-            "city": "Berlin",
-            "country": "Germany"
-          }
-        },
-        "disclaimer": {
-          "content_responsibility": "The licensor is responsible for the audio file. Pixabay monitors uploaded audio files only to a reasonable extent and cannot be held responsible for user actions.",
-          "contact_email": "info@pixabay.com",
-          "note": "This is not a tax receipt or invoice."
+{
+  "tracks": [
+    {
+      "title": "Voyage",
+      "artist": "Density & Time",
+      "audio": "/music/youtube-density-voyage.mp3",
+      "artwork": "/music/youtube-default-art.jpg",
+
+      "source": {
+        "platform": "youtube",
+        "url": "https://www.youtube.com/audiolibrary_download?vid=12345",
+        "id": "YT-12345"
+      },
+
+      "license": {
+        "type": "YouTube Audio Library",
+        "requires_attribution": true,
+        "terms_url": "https://support.google.com/youtube/answer/3376882"
+      },
+
+      "attribution": "Music: “Voyage” by Density & Time — YouTube Audio Library (Attribution Required)"
+    },
+    {
+      "title": "Cylinder Seven",
+      "artist": "Chris Zabriskie",
+      "audio": "/music/fma-cylinder-seven.mp3",
+      "artwork": "/music/fma-default-art.jpg",
+
+      "source": {
+        "platform": "fma",
+        "url": "https://freemusicarchive.org/music/Chris_Zabriskie/Cylinders/Cylinder_Seven/",
+        "id": "FMA-98765"
+      },
+
+      "license": {
+        "type": "CC-BY",
+        "requires_attribution": true,
+        "license_url": "https://creativecommons.org/licenses/by/4.0/"
+      },
+
+      "attribution": "Music: “Cylinder Seven” by Chris Zabriskie — CC‑BY 4.0 via Free Music Archive"
+    },
+    {
+      "title": "We Own the Night",
+      "artist": "Jakob Welik",
+      "audio": "/music/jakob_welik-we-own-the-night-463855.mp3",
+      "artwork": "/music/artworks-vF0QovbVgblMp9dp-RkEm6Q-t120x120.jpeg",
+
+      "source": {
+        "platform": "pixabay",
+        "url": "https://pixabay.com/music/dance-we-own-the-night-463855/",
+        "id": 463855
+      },
+
+      "license": {
+        "type": "CC0",
+        "requires_attribution": false,
+        "certificate": {
+          "licensor": "jakob_welik-912135",
+          "licensee": "autisticgeek",
+          "date_of_download": "2026-03-02 20:16:28 UTC"
         }
-      }
-    }
-  },
-  {
-    "title": "Neon Skies",
-    "artist": "Jakob Welik",
-    "audio": "/music/jakob_welik-we-own-the-night-463855.mp3",
-    "artwork": "/music/artworks-vF0QovbVgblMp9dp-RkEm6Q-t120x120.jpeg",
-    "license": "CC0",
-    "attribution": {
-      "license_certificate": {
-        "source": "Pixabay",
-        "license_type": "Pixabay Content License",
-        "licensor": {
-          "username": "jakob_welik-912135",
-          "profile_url": "https://pixabay.com/users/jakob_welik-912135/"
-        },
-        "licensee": "autisticgeek",
-        "audio_file": {
-          "title": "Neon Skies",
-          "url": "https://pixabay.com/music/dance-neon-skies-463849/",
-          "id": 463849
-        },
-        "date_of_download": "2026-03-02 20:36:21 UTC",
-        "issuer": {
-          "brand": "Pixabay (a Canva Germany GmbH brand)",
-          "address": {
-            "street": "Pappelallee 78/79",
-            "postal_code": "10437",
-            "city": "Berlin",
-            "country": "Germany"
-          }
-        },
-        "disclaimer": {
-          "content_responsibility": "The licensor is responsible for the audio file. Pixabay monitors uploaded audio files only to a reasonable extent and cannot be held responsible for user actions.",
-          "contact_email": "info@pixabay.com",
-          "note": "This is not a tax receipt or invoice."
+      },
+
+      "attribution": "Music: “We Own the Night” by Jakob Welik — Pixabay License (ID 463855)"
+    },
+
+    {
+      "title": "Neon Skies",
+      "artist": "Jakob Welik",
+      "audio": "/music/jakob_welik-neon-skies-463849.mp3",
+      "artwork": "/music/artworks-vF0QovbVgblMp9dp-RkEm6Q-t120x120.jpeg",
+
+      "source": {
+        "platform": "pixabay",
+        "url": "https://pixabay.com/music/dance-neon-skies-463849/",
+        "id": 463849
+      },
+
+      "license": {
+        "type": "CC0",
+        "requires_attribution": false,
+        "certificate": {
+          "licensor": "jakob_welik-912135",
+          "licensee": "autisticgeek",
+          "date_of_download": "2026-03-02 20:36:21 UTC"
         }
-      }
+      },
+
+      "attribution": "Music: “Neon Skies” by Jakob Welik — Pixabay License (ID 463849)"
     }
-  }
-]
+  ]
+}
