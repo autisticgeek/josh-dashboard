@@ -1,46 +1,6 @@
 {
   "tracks": [
     {
-      "title": "Voyage",
-      "artist": "Density & Time",
-      "audio": "/music/youtube-density-voyage.mp3",
-      "artwork": "/music/youtube-default-art.jpg",
-
-      "source": {
-        "platform": "youtube",
-        "url": "https://www.youtube.com/audiolibrary_download?vid=12345",
-        "id": "YT-12345"
-      },
-
-      "license": {
-        "type": "YouTube Audio Library",
-        "requires_attribution": true,
-        "terms_url": "https://support.google.com/youtube/answer/3376882"
-      },
-
-      "attribution": "Music: “Voyage” by Density & Time — YouTube Audio Library (Attribution Required)"
-    },
-    {
-      "title": "Cylinder Seven",
-      "artist": "Chris Zabriskie",
-      "audio": "/music/fma-cylinder-seven.mp3",
-      "artwork": "/music/fma-default-art.jpg",
-
-      "source": {
-        "platform": "fma",
-        "url": "https://freemusicarchive.org/music/Chris_Zabriskie/Cylinders/Cylinder_Seven/",
-        "id": "FMA-98765"
-      },
-
-      "license": {
-        "type": "CC-BY",
-        "requires_attribution": true,
-        "license_url": "https://creativecommons.org/licenses/by/4.0/"
-      },
-
-      "attribution": "Music: “Cylinder Seven” by Chris Zabriskie — CC‑BY 4.0 via Free Music Archive"
-    },
-    {
       "title": "We Own the Night",
       "artist": "Jakob Welik",
       "audio": "/music/jakob_welik-we-own-the-night-463855.mp3",
