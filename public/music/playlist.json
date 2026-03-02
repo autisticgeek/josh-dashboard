@@ -1,6 +1,30 @@
 {
   "tracks": [
     {
+      "title": "Dubstep - Dubstep Music",
+      "artist": "The_Mountain",
+      "audio": "/music/the_mountain-dubstep-dubstep-music-492803.mp3",
+      "artwork": "/music/21-52-53-357_200x200.webp",
+
+      "source": {
+        "platform": "pixabay",
+        "url": "https://pixabay.com/music/dubstep-dubstep-dubstep-music-492803/",
+        "id": 492803
+      },
+
+      "license": {
+        "type": "CC0",
+        "requires_attribution": false,
+        "certificate": {
+          "licensor": "the_mountain-3616498",
+          "licensee": "autisticgeek",
+          "date_of_download": "2026-03-02 23:00:09 UTC"
+        }
+      },
+
+      "attribution": "Music: “We Own the Night” by Jakob Welik — Pixabay License (ID 463855)"
+    },
+    {
       "title": "We Own the Night",
       "artist": "Jakob Welik",
       "audio": "/music/jakob_welik-we-own-the-night-463855.mp3",
