@@ -46,7 +46,7 @@ export default function PublicDomainAudioCard() {
     <Paper elevation={1}>
       <Card elevation={1} sx={{ p: 2, textAlign: "center", minHeight: 350 }}>
         <CardHeader
-          title="Stream Safe EDM"
+          title="Stream Safe Music"
           subheader="CC0 / Creative Commons / YouTube Audio Library"
         />
 
