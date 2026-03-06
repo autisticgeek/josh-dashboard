@@ -5,8 +5,8 @@ import { nanoid } from "nanoid";
 import HourlyTempChart from "../components/HourlyTempChart.jsx";
 import StaticCountdown from "../components/StaticCountdown.jsx";
 import RandomPokemonCard from "../components/RandomPokemonCard.jsx";
-// import EDMAudioCard from "../components/EDMAudioCard.jsx";
-import PublicDomainAudioCard from "../components/PublicDomainAudioCard.jsx"
+import EDMAudioCard from "../components/EDMAudioCard.jsx";
+// import PublicDomainAudioCard from "../components/PublicDomainAudioCard.jsx"
 import { ByuScheduleCard } from "../components/ByuScheduleCard.jsx";
 import NeonClock from "../components/NeonClock.jsx";
 import FamilyCalendarNext7 from "../components/FamilyCalendarNext2.jsx";
@@ -27,7 +27,7 @@ const modules = [
   },
   {
     id: nanoid(),
-    component: PublicDomainAudioCard,
+    component: EDMAudioCard,
     props: {},
   },
   {
